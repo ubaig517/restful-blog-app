@@ -63,6 +63,17 @@ app.post("/blogs", function(req, res) {
   });
 });
 
+// SHOW ROUTE
+app.get("/blogs/:id", function(req, res) {
+  Blog.findById(req.params.id, function(err, foundBLog) {
+    if (err) {
+      res.redirect("/blogs");
+    } else {
+      res.render("show", { blog: foundBLog });
+    }
+  });
+});
+
 // Port Config
 app.listen(port, function() {
   console.log("The Blog App Server Has Started!");
