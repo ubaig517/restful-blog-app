@@ -68,22 +68,22 @@ app.post("/blogs", function(req, res) {
 
 // SHOW ROUTE
 app.get("/blogs/:id", function(req, res) {
-  Blog.findById(req.params.id, function(err, foundBLog) {
+  Blog.findById(req.params.id, function(err, foundBlog) {
     if (err) {
       res.redirect("/blogs");
     } else {
-      res.render("show", { blog: foundBLog });
+      res.render("show", { blog: foundBlog });
     }
   });
 });
 
 // EDIT ROUTE
 app.get("/blogs/:id/edit", function(req, res) {
-  Blog.findById(req.params.id, function(err, foundBLog) {
+  Blog.findById(req.params.id, function(err, foundBlog) {
     if (err) {
       res.redirect("/blogs");
     } else {
-      res.render("edit", { blog: foundBLog });
+      res.render("edit", { blog: foundBlog });
     }
   });
 });
@@ -98,6 +98,18 @@ app.put("/blogs/:id", function(req, res) {
       res.redirect("/blogs");
     } else {
       res.redirect("/blogs/" + req.params.id);
+    }
+  });
+});
+
+// DELETE ROUTE
+app.delete("/blogs/:id", function(req, res) {
+  // destroy blog
+  Blog.findByIdAndRemove(req.params.id, function(err) {
+    if (err) {
+      res.redirect("/blogs");
+    } else {
+      res.redirect("/blogs");
     }
   });
 });
